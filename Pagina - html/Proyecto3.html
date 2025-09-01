@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Industries Inc. - Valores</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --gris: #AEB7B7;
+      --azul-marino: #133544;
+      --verde-acento: #B4DB71;
+      --blanco: #EBF3F7;
+      --azul: #4F8099;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { 
+      font-family: 'Nunito', sans-serif; 
+      color: var(--azul-marino); 
+      line-height: 1.6; 
+      background: url("FondoValores.png") no-repeat center center fixed;
+      background-size: cover;
+    }
+    h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+
+    header {
+      background: var(--azul-marino);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header img { height: 50px; margin-right: 1rem; }
+    header h2 { font-size: 1.2rem; font-weight: 600; }
+    header nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    header nav a:hover { color: var(--verde-acento); }
+
+    section { 
+      padding: 4rem 2rem; 
+      max-width: 1100px; 
+      margin:auto; 
+    }
+    section h2 { 
+      color: var(--azul); 
+      margin-bottom: 2rem; 
+      text-align:center; 
+    }
+
+    /* 🔹 Proyectos */
+    .proyectos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .proyecto {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .proyecto:hover {
+      transform: translateY(-5px);
+    }
+    .imagenes {
+      display: flex;
+    }
+    .imagenes img {
+      width: 50%;
+      object-fit: cover;
+      height: 250px;
+    }
+
+    /* 🔹 Overlay gris al pie */
+    .proyecto .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(128, 128, 128, 0.7);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .proyecto .overlay h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .proyecto .overlay p {
+      font-size: 0.95rem;
+    }
+
+    /* 🔹 Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 1.5rem;
+      max-width: 800px;
+      width: 90%;
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+    .modal-content h3 {
+      margin-bottom: 0.5rem;
+      color: var(--azul-marino);
+    }
+    .modal-content p {
+      margin-bottom: 1rem;
+      color: var(--gris);
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--azul-marino);
+    }
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .modal-buttons button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      background: var(--azul-marino);
+      color: white;
+    }
+    .modal-buttons button:hover {
+      background: var(--verde-acento);
+      color: black;
+    }
+
+    /* 🔹 Footer */
+    footer {
+      background: var(--azul-marino);
+      color: var(--blanco);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-radius: 8px;
+    }
+    footer img {
+      margin-top: 1rem;
+      max-width: 150px;
+    }
+    /*  mapa */
+.mapa-container {
+  text-align: center;         /*  horizontal */
+  margin-bottom: 2rem;        /* espacio debajo */
+}
+.mapa-container img {
+  max-width: 80%;             /* ancho  */
+  height: auto;
+  border-radius: 12px;        /* bordes redondeados (opcional) */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* sombra ligera */
+}
+/* ======== Estilos del Mapa ======== */
+#mapa {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f9f9f9;   /* fondo suave para diferenciar */
+}
+
+#mapa h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.mapa-container {
+  text-align: center;
+}
+
+.mapa-container img {
+  max-width: 80%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Logotipo Building Inc.png" alt="Logo BII">
+    <h2>Building Industries Inc.</h2>
+    <nav>
+      <a href="Boceto 19-Home.html">Home</a>
+    </nav>
+  </header>
+
+  <!--  Proyectos con modal -->
+  <section>
+      <div class="mapa-container">
+          <h2>Mapa de Proyectos</h2>
+        <img src="Mapa.png" alt="Mapa">
+      </div>
+      
+    <h2>Our Projects</h2>
+      <div class="proyectos">
+
+      <div class="proyecto" onclick="openModal(0)">
+        <div class="imagenes">
+          <img src="Solana Beeler Park - Denver, CO - Antes.png" alt="Antes del proyecto 1">
+          <img src="Solana Beeler Park - Denver, CO - Despues.png" alt="Después del proyecto 1">
+        </div>
+        <div class="overlay">
+          <h3>Residential Project</h3>
+          <p>We transformed an old space into a modern and functional home.</p>
+        </div>
+      </div>
+
+      <div class="proyecto" onclick="openModal(1)">
+        <div class="imagenes">
+          <img src="Solana Central Park - Denver, CO - Antes.png" alt="Antes del proyecto 2">
+          <img src="Solana Central Park - Denver, CO - Despues.png" alt="Después del proyecto 2">
+        </div>
+        <div class="overlay">
+          <h3>Corporate Offices</h3>
+          <p>Renewed design that boosts productivity and workplace comfort.</p>
+        </div>
+      </div>
+
+            <div class="proyecto" onclick="openModal(1)">
+        <div class="imagenes">
+          <img src="Village of Escaya - Chula Vista, CA - Antes.png" alt="Antes del proyecto 3">
+          <img src="Village of Escaya - Chula Vista, CA - Despues.png" alt="Después del proyecto 3">
+        </div>
+        <div class="overlay">
+          <h3>Corporate Offices</h3>
+          <p>Renewed design that boosts productivity and workplace comfort.</p>
+        </div>
+      </div>
+
+            <div class="proyecto" onclick="openModal(1)">
+        <div class="imagenes">
+          <img src="Solana Winchester Hills - Temecula, CA - Antes.png" alt="Antes del proyecto 4">
+          <img src="Solana Winchester Hills - Temecula, CA - Despues.png" alt="Después del proyecto 4">
+        </div>
+        <div class="overlay">
+          <h3>Corporate Offices</h3>
+          <p>Renewed design that boosts productivity and workplace comfort.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 🔹 Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modal-title"></h3>
+      <img id="modal-image" src="" alt="Imagen del proyecto">
+      <p id="modal-description"></p>
+      <div class="modal-buttons">
+        <button onclick="changeImage('antes')">Antes</button>
+        <button onclick="changeImage('despues')">Después</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 Footer restaurado -->
+  <footer id="contacto" class="fade-in">
+    <div class="footer-container" style="display:flex; flex-wrap:wrap; justify-content:space-around; gap:2rem; max-width:1100px; margin:auto;">
+      <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+        <h3>Contac</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Denver, Colorado</p>
+        <p><i class="fas fa-phone"></i> (720) 756 2052</p>
+      </div>
+      <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+        <h3>Social networks</h3>
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="mailto:buildingind1@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+        <h3>Correo</h3>
+        <p><i class="fas fa-envelope"></i> buildingind1@gmail.com</p>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem; font-size:0.9rem;">© 2025 Building Industries Inc. - All rights reserved</p>
+  </footer>
+
+  <script>
+    const proyectos = [
+      {
+        titulo: "Proyecto Residencial",
+        antes: "Solana Beeler Park - Denver, CO - Antes.png",
+        despues: "Solana Beeler Park - Denver, CO - Despues.png",
+        descripcion: "Transformamos un espacio antiguo en un hogar moderno y funcional con detalles arquitectónicos de vanguardia."
+      },
+      {
+        titulo: "Oficinas Corporativas",
+        antes: "Solana Central Park - Denver, CO - Antes.png",
+        despues: "Solana Central Park - Denver, CO - Despues.png",
+        descripcion: "Diseño renovado que impulsa la productividad y comodidad laboral, optimizando espacios y recursos."
+      }
+    ];
+
+    let currentProject = 0;
+    let currentImage = "despues";
+
+    function openModal(index) {
+      currentProject = index;
+      currentImage = "despues";
+      document.getElementById("modal-title").innerText = proyectos[index].titulo;
+      document.getElementById("modal-description").innerText = proyectos[index].descripcion;
+      document.getElementById("modal-image").src = proyectos[index].despues;
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function changeImage(type) {
+      currentImage = type;
+      document.getElementById("modal-image").src = proyectos[currentProject][type];
+    }
+  </script>
+</body>
+</html>
