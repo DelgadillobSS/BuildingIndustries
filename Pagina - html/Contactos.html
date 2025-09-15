@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Industries Inc. - Directorio</title>
+
+<!-- Tipografías -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+
+<style>
+:root {
+  --gris: #AEB7B7;
+  --azul-marino: #133544;
+  --verde-acento: #B4DB71;
+  --blanco: #EBF3F7;
+  --azul: #4F8099;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { min-height: 100vh; }
+
+body { 
+  display: flex;
+  flex-direction: column; 
+  font-family: 'Nunito', sans-serif; 
+  color: var(--azul-marino); 
+  background-color: var(--gris);
+  line-height:1.6;
+}
+main { flex:1; }
+
+/* Header */
+header {
+  background: var(--azul-marino);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header img { height:50px; }
+header h2 { font-size:1.2rem; font-weight:600; }
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+header nav a {
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  cursor:pointer;
+}
+header nav a:hover { color:var(--verde-acento); }
+
+/* Botones de idioma */
+.idioma-btn {
+  width: 40px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform .1s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  padding: 0;
+}
+.idioma-btn img { width: 22px; height: auto; display:block; }
+.idioma-btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.7); }
+.idioma-btn.active { 
+  background: var(--verde-acento); 
+  color: var(--azul-marino); 
+  border-color: transparent; 
+  box-shadow: 0 0 8px var(--verde-acento); 
+}
+
+/* Botones del formulario */
+#form-cotizacion input, 
+#form-cotizacion textarea {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Botón Enviar estilo verde */
+#form-cotizacion button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: var(--verde-acento);
+  color: var(--azul-marino);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+#form-cotizacion button:hover {
+  transform: translateY(-2px);
+  background-color: #a0c95f;
+}
+
+/* Secciones */
+h2 { text-align:center; margin-top:2rem; color: var(--azul); }
+
+/* Directorio */
+.directorio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+.tarjeta {
+  background:white;
+  padding:1.5rem;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+.tarjeta:hover { transform: translateY(-5px); }
+.tarjeta h3 { margin-bottom:0.5rem; color: var(--azul-marino); }
+.tarjeta p { margin:0.3rem 0; color: var(--azul); }
+.tarjeta .redes { margin-top:1rem; }
+.tarjeta .redes a { margin-right:10px; color: var(--azul-marino); font-size:1.2rem; }
+.tarjeta .redes a:hover { color: var(--verde-acento); }
+
+/* Footer */
+footer {
+  text-align:center;
+  padding:1rem;
+  background: var(--azul-marino);
+  color:white;
+  width: 100%;
+}
+
+/* Modal Cotización */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  text-align: center;
+}
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--azul-marino);
+}
+#form-cotizacion input, 
+#form-cotizacion textarea {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+}
+#form-cotizacion textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <img src="Logotipo Building Inc.png" alt="Logo BII">
+    <h2 data-es="Building Industries Inc." data-en="Building Industries Inc.">Building Industries Inc.</h2>
+  </div>
+  <nav>
+    <a href="Boceto 22-Home.html" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="Nosotros.html" data-es="Nosotros" data-en="About Us">Nosotros</a>
+      <a href="Servicios3.html" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="Proyectos9.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+      <a href="contactos.html" data-es="Contacto" data-en="Contact">Contacto</a>
+    <button class="idioma-btn" id="btn-es">
+      <img src="https://flagcdn.com/w20/mx.png" alt="Español">
+    </button>
+    <button class="idioma-btn" id="btn-en">
+      <img src="https://flagcdn.com/w20/us.png" alt="English">
+    </button>
+  </nav>
+</header>
+
+<!-- Contenido principal -->
+<main>
+  <h2 data-es="Directorio" data-en="Directory">Directorio</h2>
+  <div class="directorio">
+    <div class="tarjeta">
+      <p><i class="fas fa-phone"></i>(720) 763-5862</p>
+      <p><i class="fas fa-envelope"></i> Correo@buildinginc.com</p>
+      <div class="redes">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <p><i class="fas fa-phone"></i> (720) 663-5338</p>
+      <p><i class="fas fa-envelope"></i>Correo@buildinginc.com</p>
+      <div class="redes">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer con botón -->
+<footer>
+  <div style="text-align:center; margin-bottom:1rem;">
+    <button id="btn-abrir-cotizacion-footer" style="
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: var(--verde-acento);
+      color: var(--azul-marino);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    ">
+      <span data-es="Solicitar Cotización" data-en="Request Quote">Solicitar Cotización</span>
+    </button>
+  </div>
+  <p>&copy; 2025 Building Industries Inc. Todos los derechos reservados.</p>
+</footer>
+
+<!-- Modal Cotización -->
+<div id="modal-cotizacion" class="modal">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <h2 data-es="Solicita tu cotización" data-en="Request your quote">Solicita tu cotización</h2>
+    <form id="form-cotizacion">
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <input type="tel" name="telefono" placeholder="Teléfono" required>
+      <input type="email" name="email" placeholder="Correo" required>
+      <textarea name="mensaje" placeholder="Describe tu proyecto" required></textarea>
+      <button type="submit" class="btn" data-es="Enviar" data-en="Send">Enviar</button>
+    </form>
+    <p id="mensaje-enviado" style="display:none; color:var(--verde-acento); font-weight:bold; margin-top:1rem;"
+      data-es="¡Gracias! Te contactaremos pronto." data-en="Thanks! We will contact you soon.">
+      ¡Gracias! Te contactaremos pronto.
+    </p>
+    <button id="btn-cerrar-modal" style="
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: var(--gris);
+      color: var(--azul-marino);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    " data-es="Cerrar" data-en="Close">Cerrar</button>
+  </div>
+</div>
+
+<style>
+
+/* Botón Enviar en modal */
+#form-cotizacion button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: var(--verde-acento);
+  color: var(--azul-marino);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+#form-cotizacion button:hover {
+  transform: translateY(-2px);
+  background-color: #a0c95f; /* un verde un poco más oscuro al pasar el mouse */
+}
+</style>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+
+emailjs.init("Yy_gxYi7cvFkvSwST");   //  Llave Publica
+
+// Traducción
+function translatePage(lang) {
+  document.querySelectorAll('[data-es][data-en]').forEach(el => {
+    el.textContent = (lang === 'es') ? el.getAttribute('data-es') : el.getAttribute('data-en');
+  });
+}
+function setLanguage(lang){
+  const btnEs = document.getElementById("btn-es");
+  const btnEn = document.getElementById("btn-en");
+  btnEs.classList.toggle("active", lang==="es");
+  btnEn.classList.toggle("active", lang==="en");
+  localStorage.setItem("lang", lang);
+  translatePage(lang);
+}
+document.getElementById("btn-es").addEventListener("click", ()=> setLanguage("es"));
+document.getElementById("btn-en").addEventListener("click", ()=> setLanguage("en"));
+window.addEventListener("DOMContentLoaded", ()=> setLanguage(localStorage.getItem("lang")||"es"));
+
+// Modal
+const modal = document.getElementById("modal-cotizacion");
+const btnCotizar = document.getElementById("btn-abrir-cotizacion-footer");
+const btnCerrarModal = document.getElementById("btn-cerrar-modal");
+const closeModal = modal.querySelector(".modal-close");
+const formCotizacion = document.getElementById("form-cotizacion");
+const mensajeEnviado = document.getElementById("mensaje-enviado");
+
+// Abrir modal
+btnCotizar.addEventListener("click", e => {
+  e.preventDefault();
+  modal.style.display = "flex";
+});
+
+// Cerrar modal (botón X)
+closeModal.addEventListener("click", () => cerrarModal());
+
+// Cerrar modal (botón Cerrar)
+btnCerrarModal.addEventListener("click", () => cerrarModal());
+
+// Cerrar modal al hacer clic fuera
+modal.addEventListener("click", e => { 
+  if(e.target === modal) cerrarModal();
+});
+
+// Función de cierre
+function cerrarModal(){
+  modal.style.display = "none";
+  formCotizacion.reset();
+  formCotizacion.style.display = "block";
+  mensajeEnviado.style.display = "none";
+}
+// Abrir modal automáticamente si venimos con el hash #abrir-cotizacion
+window.addEventListener("DOMContentLoaded", () => {
+  if (window.location.hash === "#abrir-cotizacion") {
+    const modal = document.getElementById("modal-cotizacion");
+    modal.style.display = "flex";
+  }
+});
+
+// Enviar formulario EmailJs ------------------------
+formCotizacion.addEventListener("submit", e=>{
+  e.preventDefault();
+
+const formData = {
+  name: formCotizacion.nombre.value,
+  telefono: formCotizacion.telefono.value,
+  email: formCotizacion.email.value,
+  message: formCotizacion.mensaje.value
+};
+
+emailjs.send("service_v20fucl","template_10pml8e",formData)
+  .then(()=>{
+    formCotizacion.style.display = "none";
+    mensajeEnviado.style.display = "block";
+    setTimeout(cerrarModal,3000);
+  }, error=> alert("Error al enviar: "+JSON.stringify(error)));
+
+});
+
+</script>
+
+</body>
+</html>

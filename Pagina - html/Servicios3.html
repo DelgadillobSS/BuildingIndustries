@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Industries Inc. - Servicios Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --gris: #AEB7B7;
+      --azul-marino: #133544;
+      --verde-acento: #B4DB71;
+      --blanco: #EBF3F7;
+      --azul: #4F8099;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { 
+      font-family: 'Nunito', sans-serif; 
+      color: var(--azul-marino); 
+      line-height: 1.6; 
+      background: url("FondoValores.png") no-repeat center center fixed;
+      background-size: cover;
+    }
+    h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+
+    header {
+      background: var(--azul-marino);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    header img { height: 50px; margin-right: 1rem; }
+    header h2 { font-size: 1.2rem; font-weight: 600; }
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+    header nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: .25rem .5rem;
+      border-radius: .375rem;
+    }
+    header nav a:hover { color: var(--verde-acento); }
+
+    /* Botones idioma iguales que en la otra página */
+    .idioma-btn {
+      background: transparent;
+      color: #fff;
+      font-size: 1.2rem;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: .5rem;
+      padding: .25rem .5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: transform .1s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .idioma-btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.7); }
+    .idioma-btn.active { background: var(--verde-acento); color: var(--azul-marino); border-color: transparent; }
+
+    section { 
+      padding: 4rem 2rem; 
+      max-width: 1100px; 
+      margin:auto; 
+    }
+    section h2 { 
+      color: var(--azul); 
+      margin-bottom: 2rem; 
+      text-align:center; 
+    }
+
+    /* Grid de servicios */
+    .servicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Flip card */
+    .flip-card {
+      background-color: transparent;
+      perspective: 1000px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .flip-card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .flip-card:hover img { transform: scale(1.05); }
+
+    .flip-card-front .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(19,53,68,0.85);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .flip-card-back {
+      background: var(--azul-marino);
+      color: var(--blanco);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .flip-card-back h3 { margin-bottom: 1rem; }
+    .flip-card-back p { margin-bottom: 1.5rem; }
+
+    .contact-button {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      background: var(--verde-acento);
+      color: var(--azul-marino);
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-button:hover { background: #9dc962; }
+
+    /* Footer */
+    footer {
+      background: var(--azul-marino);
+      color: var(--blanco);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-radius: 8px;
+    }
+    footer img { max-width: 150px; }
+
+    /* Animación delay */
+    .flip-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Logotipo Building Inc.png" alt="Logo BII">
+    <h2 data-es="Building Industries Inc." data-en="Building Industries Inc.">Building Industries Inc.</h2>
+    <nav>
+      <a href="Boceto 22-Home.html" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="Nosotros.html" data-es="Nosotros" data-en="About Us">Nosotros</a>
+      <a href="Servicios3.html" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="Proyectos9.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+      <a href="contactos.html" data-es="Contacto" data-en="Contact">Contacto</a>
+      <!-- Botones de idioma -->
+      <button class="idioma-btn" id="btn-es">
+        <img src="https://flagcdn.com/w20/mx.png" alt="Español" style="width:24px; height:auto;">
+      </button>
+      <button class="idioma-btn" id="btn-en">
+        <img src="https://flagcdn.com/w20/us.png" alt="English" style="width:24px; height:auto;">
+      </button>
+    </nav>
+  </header>
+
+<!-- Imagen hero sobre proyectos -->
+<section id="proyectos-hero" style="
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-image: url('Valores.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+">
+  <h2 data-es="Nuestros Proyectos" data-en="Our Projects" style="
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    text-align: center;
+  ">Nuestros Proyectos</h2>
+</section>
+
+<section>
+  <h2 data-es="Nuestros Servicios" data-en="Our Services">Nuestros Servicios</h2>
+  <div class="servicios">
+    <!-- 1 -->
+<div class="flip-card" data-delay="0">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="Consultoría Arquitectónica.jpg" alt="Consultoría Arquitectónica">
+      <div class="overlay"><h3 data-es="Consultoría Arquitectónica" data-en="Architectural Consulting">Consultoría Arquitectónica</h3></div>
+    </div>
+    <div class="flip-card-back">
+      <h3 data-es="Consultoría Arquitectónica" data-en="Architectural Consulting">Consultoría Arquitectónica</h3>
+      <p data-es="Planeamos y diseñamos proyectos innovadores con la mejor calidad." data-en="We plan and design innovative projects with the highest quality.">Planeamos y diseñamos proyectos innovadores con la mejor calidad.</p>
+      <button class="contact-button" data-es="Solicitar Info" data-en="Request Info" onclick="window.location.href='mailto:buildingind1@gmail.com'">Solicitar Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="flip-card" data-delay="100">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="Construcción Residencial.jpg" alt="Construcción Residencial">
+      <div class="overlay"><h3 data-es="Construcción Residencial" data-en="Residential Construction">Construcción Residencial</h3></div>
+    </div>
+    <div class="flip-card-back">
+      <h3 data-es="Construcción Residencial" data-en="Residential Construction">Construcción Residencial</h3>
+      <p data-es="Transformamos espacios en hogares funcionales, modernos y seguros." data-en="We transform spaces into functional, modern, and safe homes.">Transformamos espacios en hogares funcionales, modernos y seguros.</p>
+      <button class="contact-button" data-es="Solicitar Info" data-en="Request Info" onclick="window.location.href='mailto:buildingind1@gmail.com'">Solicitar Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="flip-card" data-delay="200">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="Renovación Comercial.jpg" alt="Renovación Comercial">
+      <div class="overlay"><h3 data-es="Renovación Comercial" data-en="Commercial Renovation">Renovación Comercial</h3></div>
+    </div>
+    <div class="flip-card-back">
+      <h3 data-es="Renovación Comercial" data-en="Commercial Renovation">Renovación Comercial</h3>
+      <p data-es="Mejoramos la productividad con diseños atractivos y funcionales para tu negocio." data-en="We boost productivity with attractive and functional designs for your business.">Mejoramos la productividad con diseños atractivos y funcionales para tu negocio.</p>
+      <button class="contact-button" data-es="Solicitar Info" data-en="Request Info" onclick="window.location.href='mailto:buildingind1@gmail.com'">Solicitar Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="flip-card" data-delay="300">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="Gestión de Proyectos.jpg" alt="Gestión de Proyectos">
+      <div class="overlay"><h3 data-es="Gestión de Proyectos" data-en="Project Management">Gestión de Proyectos</h3></div>
+    </div>
+    <div class="flip-card-back">
+      <h3 data-es="Gestión de Proyectos" data-en="Project Management">Gestión de Proyectos</h3>
+      <p data-es="Planificación y supervisión profesional en todas las etapas de construcción." data-en="Professional planning and supervision at every stage of construction.">Planificación y supervisión profesional en todas las etapas de construcción.</p>
+      <button class="contact-button" data-es="Solicitar Info" data-en="Request Info" onclick="window.location.href='mailto:buildingind1@gmail.com'">Solicitar Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="flip-card" data-delay="400">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="Diseño de Interiores.jpg" alt="Diseño de Interiores">
+      <div class="overlay"><h3 data-es="Diseño de Interiores" data-en="Interior Design">Diseño de Interiores</h3></div>
+    </div>
+    <div class="flip-card-back">
+      <h3 data-es="Diseño de Interiores" data-en="Interior Design">Diseño de Interiores</h3>
+      <p data-es="Optimización de espacios, colores y mobiliario para ambientes únicos y funcionales." data-en="Optimization of spaces, colors, and furniture for unique and functional environments.">Optimización de espacios, colores y mobiliario para ambientes únicos y funcionales.</p>
+      <button class="contact-button" data-es="Solicitar Info" data-en="Request Info" onclick="window.location.href='mailto:buildingind1@gmail.com'">Solicitar Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- 6 -->
+<div class="flip-card" data-delay="500">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src="Mantenimiento y Remodelación.jpg" alt="Mantenimiento y Remodelación">
+      <div class="overlay"><h3 data-es="Mantenimiento y Remodelación" data-en="Maintenance & Remodeling">Mantenimiento y Remodelación</h3></div>
+    </div>
+    <div class="flip-card-back">
+      <h3 data-es="Mantenimiento y Remodelación" data-en="Maintenance & Remodeling">Mantenimiento y Remodelación</h3>
+      <p data-es="Garantizamos durabilidad y modernización constante de tus espacios residenciales y comerciales." data-en="We guarantee durability and constant modernization of your residential and commercial spaces.">Garantizamos durabilidad y modernización constante de tus espacios residenciales y comerciales.</p>
+      <button class="contact-button" data-es="Solicitar Info" data-en="Request Info" onclick="window.location.href='mailto:buildingind1@gmail.com'">Solicitar Info</button>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container" style="display:flex; flex-wrap:wrap; justify-content:space-around; gap:2rem; max-width:1100px; margin:auto;">
+    <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+      <h3 data-es="Contacto" data-en="Contact">Contacto</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Denver, Colorado</p>
+      <p><i class="fas fa-phone"></i> (720) 763 58 62</p>
+    </div>
+    <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+      <h3 data-es="Redes Sociales" data-en="Social Media">Redes Sociales</h3>
+      <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="mailto:buildingind1@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+      <h3 data-es="Correo" data-en="Email">Correo</h3>
+      <p><i class="fas fa-envelope"></i> buildingind1@gmail.com</p>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.9rem;" data-es="© 2025 Building Industries Inc. - Todos los derechos reservados" data-en="© 2025 Building Industries Inc. - All rights reserved">© 2025 Building Industries Inc. - Todos los derechos reservados</p>
+</footer>
+
+<script>
+  // Animación scroll con delay
+  const cards = document.querySelectorAll('.flip-card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const delay = entry.target.dataset.delay || 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+      }
+    });
+  }, { threshold: 0.2 });
+  cards.forEach(card => observer.observe(card));
+
+  // Traducción igual que en la otra página
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnEs = document.getElementById("btn-es");
+    const btnEn = document.getElementById("btn-en");
+    const translatable = document.querySelectorAll("[data-es][data-en]");
+
+    function setLanguage(lang) {
+      translatable.forEach(el => {
+        const txt = el.getAttribute(`data-${lang}`);
+        if (txt !== null) el.textContent = txt;
+      });
+      localStorage.setItem("lang", lang);
+      document.documentElement.setAttribute("lang", lang);
+      btnEs.classList.toggle("active", lang === "es");
+      btnEn.classList.toggle("active", lang === "en");
+    }
+
+    btnEs.addEventListener("click", () => setLanguage("es"));
+    btnEn.addEventListener("click", () => setLanguage("en"));
+
+    const saved = localStorage.getItem("lang") || "es";
+    setLanguage(saved);
+  });
+</script>
+</body>
+</html>

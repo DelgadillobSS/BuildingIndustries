@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Industries Inc. - Valores</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --gris: #AEB7B7;
+      --azul-marino: #133544;
+      --verde-acento: #B4DB71;
+      --blanco: #EBF3F7;
+      --azul: #4F8099;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--azul-marino);
+      line-height: 1.6;
+      background: url("FondoValores.png") no-repeat center center fixed;
+      background-size: cover;
+    }
+    h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+
+    header {
+      background: var(--azul-marino);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    header img { height: 50px; }
+    header h2 { font-size: 1.2rem; font-weight: 600; }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: .25rem .5rem;
+      border-radius: .375rem;
+    }
+    header nav a:hover { color: var(--verde-acento); }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-left: .5rem;
+    }
+    .idioma-btn {
+      background: transparent;
+      color: #fff;
+      font-size: 1.2rem;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: .5rem;
+      padding: .25rem .5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: transform .1s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .idioma-btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.7); }
+    .idioma-btn.active { background: var(--verde-acento); color: var(--azul-marino); border-color: transparent; }
+
+    footer {
+      background: var(--azul-marino);
+      color: var(--blanco);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-radius: 8px;
+    }
+
+    section { padding: 4rem 2rem; max-width: 1100px; margin:auto; }
+    section h2 { color: var(--azul); margin-bottom: 2rem; text-align:center; }
+
+    /* Sección valores */
+    #valores {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 4rem 2rem;
+    }
+
+    .valores-imagen {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    .valores-imagen img {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .valores-texto {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      flex: 1 1 500px;
+    }
+
+    .valor {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .valor h3 { margin-bottom: 1rem; color: var(--azul-marino); font-size: 1.3rem; }
+    .valor p { line-height: 1.5; }
+
+    .mini-valor {
+      display: inline-block;
+      background: var(--verde-acento);
+      color: var(--azul-marino);
+      font-weight: bold;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    /* --- NUEVO: vista móvil optimizada --- */
+    @media(max-width:900px){
+      #valores {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .valores-imagen {
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+      .valores-imagen img {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+      }
+      .valores-texto {
+        flex: 1 1 100%;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <img src="Logotipo Building Inc.png" alt="Logo BII">
+    <h2 data-es="Building Industries Inc." data-en="Building Industries Inc.">Building Industries Inc.</h2>
+  </div>
+
+  <nav>
+    <a href="Boceto 22-Home.html" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="Nosotros.html" data-es="Nosotros" data-en="About Us">Nosotros</a>
+      <a href="Servicios3.html" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="Proyectos9.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+      <a href="contactos.html" data-es="Contacto" data-en="Contact">Contacto</a>
+    <!-- Botones de idioma -->
+    <button class="idioma-btn" id="btn-es">
+      <img src="https://flagcdn.com/w20/mx.png" alt="Español" style="width:24px; height:auto;">
+    </button>
+    <button class="idioma-btn" id="btn-en">
+      <img src="https://flagcdn.com/w20/us.png" alt="English" style="width:24px; height:auto;">
+    </button>
+  </nav>
+</header>
+
+  <section id="valores">
+    <div class="valores-imagen">
+      <img src="Fortalezas.png" alt="Imagen Valores">
+    </div>
+
+    <div class="valores-texto">
+      <div class="valor">
+        <h3 data-es="MISIÓN" data-en="MISSION">MISIÓN</h3>
+        <p data-es="Brindar mano de obra y servicio al cliente de excelente calidad, manteniendo el más alto nivel de profesionalismo, honestidad y equidad en nuestras relaciones con clientes, empleados y proveedores. Crecer ofreciendo servicios y soluciones útiles y significativas al mercado, y expandirnos hacia nuevas áreas."
+           data-en="Provide labor and customer service of excellent quality, maintaining the highest level of professionalism, honesty, and fairness in our relationships with clients, employees, and suppliers. Grow by offering useful and meaningful services and solutions to the market, and expand into new areas.">
+          Brindar mano de obra y servicio al cliente de excelente calidad, manteniendo el más alto nivel de profesionalismo, honestidad y equidad en nuestras relaciones con clientes, empleados y proveedores. Crecer ofreciendo servicios y soluciones útiles y significativas al mercado, y expandirnos hacia nuevas áreas.
+        </p>
+      </div>
+
+      <div class="valor">
+        <h3 data-es="VISIÓN" data-en="VISION">VISIÓN</h3>
+        <p data-es="Ser la marca líder en construcción, reconocida por su calidad e innovación, apoyando a nuestros colaboradores y siendo el contratista preferido en nuestro mercado."
+           data-en="To be the leading construction brand, recognized for its quality and innovation, supporting our collaborators and being the preferred contractor in our market.">
+          Ser la marca líder en construcción, reconocida por su calidad e innovación, apoyando a nuestros colaboradores y siendo el contratista preferido en nuestro mercado.
+        </p>
+      </div>
+
+      <div class="valor">
+        <h3 data-es="VALORES" data-en="VALUES">VALORES</h3>
+        <p data-es="Los valores fundamentales que guían nuestra empresa:"
+           data-en="The core values that guide our company:">Los valores fundamentales que guían nuestra empresa:</p>
+        <div class="mini-valor" data-es="Trabajo en Equipo" data-en="Teamwork">Trabajo en Equipo</div>
+        <div class="mini-valor" data-es="Seguridad" data-en="Safety">Seguridad</div>
+        <div class="mini-valor" data-es="Excelencia" data-en="Excellence">Excelencia</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contacto" class="fade-in">
+    <div class="footer-container" style="display:flex; flex-wrap:wrap; justify-content:space-around; gap:2rem; max-width:1100px; margin:auto;">
+      <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+        <h3 data-es="Contacto" data-en="Contact">Contacto</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Denver, Colorado</p>
+        <p><i class="fas fa-phone"></i> (720) 763 58 62</p>
+      </div>
+      <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+        <h3 data-es="Redes sociales" data-en="Social Media">Redes sociales</h3>
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="mailto:buildingind1@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <div style="flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center;">
+        <h3 data-es="Correo" data-en="Email">Correo</h3>
+        <p><i class="fas fa-envelope"></i> buildingind1@gmail.com</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem; font-size:0.9rem;">
+      <p data-es="© 2025 Building Industries Inc. - Todos los derechos reservados"
+         data-en="© 2025 Building Industries Inc. - All rights reserved">
+        © 2025 Building Industries Inc. - Todos los derechos reservados
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btnEs = document.getElementById("btn-es");
+      const btnEn = document.getElementById("btn-en");
+      const translatable = document.querySelectorAll("[data-es][data-en]");
+
+      function setLanguage(lang) {
+        // cambia textos
+        translatable.forEach(el => {
+          const txt = el.getAttribute(`data-${lang}`);
+          if (txt !== null) el.textContent = txt;
+        });
+        // guarda preferencia y actualiza <html lang="">
+        localStorage.setItem("lang", lang);
+        document.documentElement.setAttribute("lang", lang);
+
+        // resalta botón activo
+        btnEs.classList.toggle("active", lang === "es");
+        btnEn.classList.toggle("active", lang === "en");
+      }
+
+      // listeners
+      if (btnEs) btnEs.addEventListener("click", () => setLanguage("es"));
+      if (btnEn) btnEn.addEventListener("click", () => setLanguage("en"));
+
+      // idioma inicial (por preferencia guardada o por defecto)
+      const saved = localStorage.getItem("lang") || "es";
+      setLanguage(saved);
+    });
+  </script>
+</body>
+</html>

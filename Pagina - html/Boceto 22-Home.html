@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Industries Inc.</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Variables de colores */
+    :root {
+      --gris: #AEB7B7;
+      --azul: #4F8099;
+      --blanco: #EBF3F7;
+      --azul-marino: #133544;
+      --verde-acento: #B4DB71;
+    }
+
+    /* Reset y base */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; overflow-x:hidden; scroll-behavior:smooth; }
+    body { font-family:'Nunito', sans-serif; background:var(--blanco); color:var(--azul-marino); line-height:1.6; }
+    h1,h2,h3 { font-family:'Montserrat', sans-serif; }
+
+    /* Header */
+    header {
+      background: var(--azul-marino);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header img { height:50px; }
+    header h2 { font-size:1.2rem; font-weight:600; }
+    header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto; /* 👈 Esto lo manda a la derecha */
+}
+
+    header nav a {
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+    }
+    header nav a:hover { color:var(--verde-acento); }
+
+    /* Botones de idioma */
+    .idioma-btn {
+      background: transparent;
+      color: white;
+      font-size: 1.2rem;
+      padding: 0.2rem 0.5rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 5px;
+    }
+    .idioma-btn:hover { color: var(--verde-acento); }
+    /* <-- ESTILO ADICIONADO: resalta y "brilla" cuando está activo */
+    .idioma-btn.active {
+      background: var(--verde-acento);
+      color: var(--azul-marino);
+      box-shadow: 0 0 14px rgba(180,219,113,0.6);
+    }
+
+    /* Hero */
+    .hero { position: relative; width:100%; height:500px; overflow:hidden; }
+    .hero img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
+    .hero .after { clip-path: inset(0 100% 0 0); transition: clip-path 1.5s ease; }
+    .hero:hover .after { clip-path: inset(0 0 0 0); }
+
+    .hero-content {
+      position: relative;
+      z-index:2;
+      text-align:center;
+      color:white;
+      padding:6rem 2rem;
+      background: rgba(19,53,68,0.5);
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+    .hero h1 { font-size:3rem; margin-bottom:1rem; }
+    .btn {
+      background: var(--verde-acento);
+      color: var(--azul-marino);
+      padding:0.7rem 1.5rem;
+      border:none;
+      cursor:pointer;
+      font-weight:bold;
+      border-radius:5px;
+      margin:0.5rem;
+      transition: background 0.3s;
+    }
+    .btn:hover { background:#9bc85f; }
+
+    /* Secciones */
+    section { padding:4rem 2rem; max-width:1100px; margin:auto; }
+    section h2 { color: var(--azul); margin-bottom:1rem; text-align:center; }
+
+    #nosotros { background: var(--gris); color: var(--azul-marino); border-radius:8px; padding:3rem; text-align:center; }
+    #nosotros p { max-width:800px; margin:auto; }
+
+    /* Servicios */
+    #servicios { background: var(--blanco); }
+    .servicios {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap:2rem;
+      margin-top:2rem;
+    }
+    .servicio {
+      background:white;
+      padding:2rem;
+      border-radius:8px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      border-top:4px solid var(--azul);
+      text-align:left;
+      opacity:0;
+      transform:translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .servicio.from-left { transform: translateX(-50px) translateY(40px); }
+    .servicio.from-right { transform: translateX(50px) translateY(40px); }
+    .servicio.visible { opacity:1; transform:translateX(0) translateY(0); }
+    .servicio:nth-child(3n+1) { margin-top:0px; }
+    .servicio:nth-child(3n+2) { margin-top:20px; }
+    .servicio:nth-child(3n+3) { margin-top:40px; }
+
+    /* Proyectos */
+    #proyectos { background: var(--azul); color:white; border-radius:8px; }
+    .proyectos {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+    .proyecto {
+      position:relative;
+      overflow:hidden;
+      border-radius:8px;
+      border:3px solid var(--blanco);
+      cursor:pointer;
+    }
+    .proyecto img { width:100%; display:block; transition: transform 0.3s; }
+    .proyecto .after { position:absolute; top:0; left:0; width:100%; height:100%; clip-path: inset(0 100% 0 0); transition: clip-path 1.5s ease; }
+    .proyecto:hover .after { clip-path: inset(0 0 0 0); }
+    .proyecto:hover img { transform: scale(1.05); }
+
+    /* Fade-in general */
+    .fade-in { opacity:0; transform: translateY(40px); transition: opacity 1s ease-out, transform 1s ease-out; }
+    .fade-in.visible { opacity:1; transform: translateY(0); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      visibility:hidden;
+      opacity:0;
+      transition: opacity 0.3s ease;
+    }
+    /* Suponiendo que la imagen ya tiene una clase o un contenedor */
+img#antes, img#despues {
+  width: 100%;    /* ocupa todo el ancho del contenedor */
+  height: auto;   /* mantiene la proporción de la imagen */
+  display: block; /* evita espacio extra debajo de la imagen */
+  object-fit: contain; /* asegura que se vea completa dentro del contenedor */
+}
+    .lightbox.active { visibility:visible; opacity:1; }
+    .lightbox img {
+      max-width:90%;
+      max-height:80%;
+      border-radius:8px;
+      border:3px solid white;
+    }
+    .lightbox .close, .lightbox .prev, .lightbox .next {
+      position:absolute;
+      color:white;
+      cursor:pointer;
+      user-select:none;
+    }
+    .lightbox .close { top:20px; right:30px; font-size:2rem; }
+    .lightbox .prev, .lightbox .next { top:50%; transform:translateY(-50%); font-size:3rem; }
+    .lightbox .prev { left:40px; }
+    .lightbox .next { right:40px; }
+
+    /* Footer */
+    footer {
+      background: var(--azul-marino);
+      color: var(--blanco);
+      text-align:center;
+      padding:2rem;
+      margin-top:2rem;
+      border-radius:8px;
+    }
+    .footer-container { display:flex; flex-wrap:wrap; justify-content:space-around; gap:2rem; max-width:1100px; margin:auto; }
+    .footer-container > div { flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center; }
+    .footer-container a { color:white; margin:0 0.5rem; font-size:1.2rem; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <img src="Logotipo Building Inc.png" alt="Logo BII">
+      <h2 data-es="Building Industries Inc." data-en="Building Industries Inc.">Building Industries Inc.</h2>
+    </div>
+
+    <nav>
+      <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="Nosotros.html" data-es="Nosotros" data-en="About Us">Nosotros</a>
+      <a href="Servicios3.html" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="Proyectos9.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+      <a href="contactos.html" data-es="Contacto" data-en="Contact">Contacto</a>
+      <button class="idioma-btn" id="btn-es">
+        <img src="https://flagcdn.com/w20/mx.png" alt="Español" style="width:24px; height:auto;">
+      </button>
+      <button class="idioma-btn" id="btn-en">
+        <img src="https://flagcdn.com/w20/us.png" alt="English" style="width:24px; height:auto;">
+      </button>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <img src="Village of Escaya - Chula Vista, CA - Despues.png" alt="Después" class="before">
+    <img src="Village of Escaya - Chula Vista, CA.png" alt="Antes" class="after">
+    <div class="hero-content">
+      <h1 data-es="Building Industries Inc." data-en="Building Industries Inc.">Building Industries Inc.</h1>
+      <div>
+        <button class="btn" 
+    onclick="window.location.href='contactos.html#abrir-cotizacion';"
+    data-es="Solicita una cotización" 
+    data-en="Request a Quote">
+    Solicita una cotización
+</button>
+
+        <button class="btn" onclick="window.location.href='valores7.html';"
+          data-es="Conoce nuestros valores" data-en="Know our values">Conoce nuestros valores</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre nosotros -->
+  <section id="nosotros" class="fade-in">
+    <h2 data-es="Sobre nosotros" data-en="About us">Sobre nosotros</h2>
+    <p data-es="Somos Building Industries Inc., una empresa de construcción con más de 5 años de experiencia en proyectos residenciales, industriales y comerciales de alta calidad."
+       data-en="We are Building Industries Inc., a construction company with over 5 years of experience undertaking high-quality residential, industrial, and commercial projects.">
+      Somos Building Industries Inc., una empresa de construcción con más de 5 años de experiencia en proyectos residenciales, industriales y comerciales de alta calidad.
+    </p>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="fade-in">
+    <h2 data-es="Nuestros servicios" data-en="Our Services">Nuestros servicios</h2>
+    <div class="servicios">
+      <div class="servicio">
+        <h3><i class="fas fa-building"></i> <span data-es="OBRA ESTRUCTURAL" data-en="STRUCTURAL WORK">OBRA ESTRUCTURAL</span></h3>
+        <ul>
+          <li data-es="Enmarcado estructural" data-en="Structural framing">Enmarcado estructural</li>
+          <li data-es="Enmarcado de muros" data-en="Wall framing">Enmarcado de muros</li>
+          <li data-es="Refuerzos y bloqueos" data-en="Reinforcements and blocking">Refuerzos y bloqueos</li>
+          <li data-es="Instalación de terrazas" data-en="Terrace installation">Instalación de terrazas</li>
+          <li data-es="Enmarcado exterior" data-en="Exterior framing">Enmarcado exterior</li>
+          <li data-es="Instalación de Tyvek" data-en="Tyvek installation">Instalación de Tyvek</li>
+        </ul>
+      </div>
+      <div class="servicio">
+        <h3><i class="fas fa-paint-roller"></i> <span data-es="ACABADOS E INTERIORES" data-en="FINISHES & INTERIORS">ACABADOS E INTERIORES</span></h3>
+        <ul>
+          <li data-es="Carpintería y molduras" data-en="Carpentry and moldings">Carpintería y molduras</li>
+          <li data-es="Marcos de puertas y herrajes" data-en="Door frames and hardware">Marcos de puertas y herrajes</li>
+          <li data-es="Reparación de paneles de yeso" data-en="Drywall repair">Reparación de paneles de yeso</li>
+          <li data-es="Distribución interior" data-en="Interior layout">Distribución interior</li>
+          <li data-es="Servicios de malla" data-en="Mesh services">Servicios de malla</li>
+          <li data-es="Pintura" data-en="Painting">Pintura</li>
+        </ul>
+      </div>
+      <div class="servicio">
+        <h3><i class="fas fa-truck-loading"></i> <span data-es="SOPORTE EN OBRA Y LOGÍSTICA" data-en="ON-SITE SUPPORT & LOGISTICS">SOPORTE EN OBRA Y LOGÍSTICA</span></h3>
+        <ul>
+          <li data-es="Listas de verificación (punch list)" data-en="Checklists (punch list)">Listas de verificación (punch list)</li>
+          <li data-es="Limpieza general" data-en="General cleaning">Limpieza general</li>
+          <li data-es="Carga y descarga de materiales" data-en="Material loading/unloading">Carga y descarga de materiales</li>
+          <li data-es="Personal capacitado en protección" data-en="Trained safety personnel">Personal capacitado en protección</li>
+          <li data-es="Herramientas de trabajo propias" data-en="Own work tools">Herramientas de trabajo propias</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos -->
+  <section id="proyectos" class="fade-in">
+    <h2 data-es="Proyectos destacados" data-en="Featured Projects">Proyectos destacados</h2>
+    <div class="proyectos">
+      <div class="proyecto">
+        <img src="Centrallpark-Denver.png" alt="Proyecto 1 Antes" class="before">
+        <img src="Centrallpark-Denver Despues.png" alt="Proyecto 1 Después" class="after">
+      </div>
+      <div class="proyecto">
+        <img src="CótaVera-Chulavista.png" alt="Proyecto 2 Antes" class="before">
+        <img src="CótaVera-Chulavista Despues.png" alt="Proyecto 2 Después" class="after">
+      </div>
+      <div class="proyecto">
+        <img src="Beelerpark-Denver.png" alt="Proyecto 3 Antes" class="before">
+        <img src="Beelerpark-Denver Despues.png" alt="Proyecto 3 Después" class="after">
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" aria-label="Cerrar">&times;</span>
+    <img src="" alt="Vista ampliada">
+    <span class="prev" aria-label="Anterior">&#10094;</span>
+    <span class="next" aria-label="Siguiente">&#10095;</span>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacto" class="fade-in">
+    <div class="footer-container">
+      <div>
+        <h3 data-es="Contacto" data-en="Contact">Contacto</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Denver, Colorado</p>
+        <p><i class="fas fa-phone"></i> (720) 763 58 62</p>
+      </div>
+      <div>
+        <h3 data-es="Redes sociales" data-en="Social Media">Redes sociales</h3>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+        <a href="mailto:buildingind1@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <div>
+        <h3 data-es="Correo" data-en="Email">Correo</h3>
+        <p><i class="fas fa-envelope"></i> buildingind1@gmail.com</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem; font-size:0.9rem;">
+      <p>© 2025 Building Industries Inc. - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Cambio de idioma
+    const btnEs = document.getElementById("btn-es");
+    const btnEn = document.getElementById("btn-en");
+
+    function cambiarIdioma(idioma) {
+      document.querySelectorAll("[data-es]").forEach(el => {
+        el.textContent = idioma === "es" ? el.getAttribute("data-es") : el.getAttribute("data-en");
+      });
+
+      // APLICAR clase active para que el botón brille en verde
+      if (btnEs && btnEn) {
+        btnEs.classList.toggle("active", idioma === "es");
+        btnEn.classList.toggle("active", idioma === "en");
+      }
+
+      // Guardar preferencia y actualizar atributo lang en <html>
+      try { localStorage.setItem("idioma", idioma); } catch(e) {}
+      document.documentElement.setAttribute("lang", idioma);
+    }
+
+    btnEs.addEventListener("click", () => cambiarIdioma("es"));
+    btnEn.addEventListener("click", () => cambiarIdioma("en"));
+
+    // Aplicar idioma guardado al cargar (si existe)
+    const idiomaGuardado = localStorage.getItem("idioma") || "es";
+    cambiarIdioma(idiomaGuardado);
+
+    // Fade-in de secciones
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin:"0px 0px -50px 0px" });
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Fade-in servicios escalera
+    const servicios = document.querySelectorAll('.servicios .servicio');
+    const servicioObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, i) => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add(i % 2 === 0 ? 'from-left' : 'from-right');
+          setTimeout(() => entry.target.classList.add('visible'), i * 300);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    servicios.forEach(s => servicioObserver.observe(s));
+
+    // Scroll suave en anclas internas
+    document.querySelectorAll('header nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith("#")) {
+          e.preventDefault();
+          const target = document.querySelector(targetId);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = lightbox.querySelector(".close");
+    const prevBtn = lightbox.querySelector(".prev");
+    const nextBtn = lightbox.querySelector(".next");
+    const proyectos = document.querySelectorAll(".proyecto");
+    let currentIndex = 0;
+    const images = Array.from(proyectos).map(p => p.querySelector(".after").src);
+
+    proyectos.forEach((proyecto,index)=>{
+      proyecto.addEventListener("click",()=> {
+        currentIndex=index;
+        lightboxImg.src=images[currentIndex];
+        lightbox.classList.add("active");
+      });
+    });
+
+    nextBtn.addEventListener("click",()=> {
+      currentIndex=(currentIndex+1)%images.length;
+      lightboxImg.src=images[currentIndex];
+    });
+
+    prevBtn.addEventListener("click",()=> {
+      currentIndex=(currentIndex-1+images.length)%images.length;
+      lightboxImg.src=images[currentIndex];
+    });
+
+    closeBtn.addEventListener("click",()=> lightbox.classList.remove("active"));
+    lightbox.addEventListener("click",e=> { if(e.target===lightbox) lightbox.classList.remove("active"); });
+
+    document.addEventListener("keydown", e=>{
+      if(!lightbox.classList.contains("active")) return;
+      if(e.key==="ArrowRight"){ currentIndex=(currentIndex+1)%images.length; lightboxImg.src=images[currentIndex]; }
+      if(e.key==="ArrowLeft"){ currentIndex=(currentIndex-1+images.length)%images.length; lightboxImg.src=images[currentIndex]; }
+      if(e.key==="Escape"){ lightbox.classList.remove("active"); }
+    });
+  });
+  </script>
+</body>
+</html>
