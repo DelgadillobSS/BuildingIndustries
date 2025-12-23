@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Building Industries Inc.</title>
 
   <!-- Tipografías -->
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* Variables de colores */
+
     :root {
       --gris: #AEB7B7;
       --azul: #4F8099;
@@ -21,13 +21,12 @@
       --verde-acento: #B4DB71;
     }
 
-    /* Reset y base */
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { width:100%; overflow-x:hidden; scroll-behavior:smooth; }
     body { font-family:'Nunito', sans-serif; background:var(--blanco); color:var(--azul-marino); line-height:1.6; }
     h1,h2,h3 { font-family:'Montserrat', sans-serif; }
 
-    /* Header */
+
     header {
       background: var(--azul-marino);
       color: white;
@@ -35,21 +34,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 1000;
     }
     header img { height:50px; }
     header h2 { font-size:1.2rem; font-weight:600; }
+
     header nav {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-left: auto; /* 👈 Esto lo manda a la derecha */
-}
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
 
     header nav a {
       color:white;
       text-decoration:none;
       font-weight:600;
       cursor:pointer;
+      padding: .25rem .5rem;
+      border-radius: .375rem;
     }
     header nav a:hover { color:var(--verde-acento); }
 
@@ -63,16 +67,19 @@
       cursor: pointer;
       transition: all 0.3s ease;
       border-radius: 5px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display:flex;
+      align-items:center;
+      gap:.4rem;
     }
-    .idioma-btn:hover { color: var(--verde-acento); }
-    /* <-- ESTILO ADICIONADO: resalta y "brilla" cuando está activo */
+    .idioma-btn:hover { color: var(--verde-acento); border-color: rgba(255,255,255,0.4); }
     .idioma-btn.active {
       background: var(--verde-acento);
       color: var(--azul-marino);
       box-shadow: 0 0 14px rgba(180,219,113,0.6);
+      border-color: transparent;
     }
 
-    /* Hero */
     .hero { position: relative; width:100%; height:500px; overflow:hidden; }
     .hero img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
     .hero .after { clip-path: inset(0 100% 0 0); transition: clip-path 1.5s ease; }
@@ -105,7 +112,6 @@
     }
     .btn:hover { background:#9bc85f; }
 
-    /* Secciones */
     section { padding:4rem 2rem; max-width:1100px; margin:auto; }
     section h2 { color: var(--azul); margin-bottom:1rem; text-align:center; }
 
@@ -176,13 +182,12 @@
       opacity:0;
       transition: opacity 0.3s ease;
     }
-    /* Suponiendo que la imagen ya tiene una clase o un contenedor */
-img#antes, img#despues {
-  width: 100%;    /* ocupa todo el ancho del contenedor */
-  height: auto;   /* mantiene la proporción de la imagen */
-  display: block; /* evita espacio extra debajo de la imagen */
-  object-fit: contain; /* asegura que se vea completa dentro del contenedor */
-}
+    img#antes, img#despues {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
     .lightbox.active { visibility:visible; opacity:1; }
     .lightbox img {
       max-width:90%;
@@ -213,6 +218,54 @@ img#antes, img#despues {
     .footer-container { display:flex; flex-wrap:wrap; justify-content:space-around; gap:2rem; max-width:1100px; margin:auto; }
     .footer-container > div { flex:1 1 250px; background-color:#1E4B5B; padding:1.5rem; border-radius:8px; text-align:center; }
     .footer-container a { color:white; margin:0 0.5rem; font-size:1.2rem; }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media(max-width: 768px) {
+      header {
+        padding: 0.8rem 1rem;
+      }
+      header nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--azul-marino);
+        padding: 1rem 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+      }
+      header nav a {
+        display: block;
+        padding: 0.8rem;
+        text-align: center;
+      }
+      header nav.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+        margin-left: auto;
+      }
+
+      /* Ajustes responsivos generales */
+      .hero { height: 360px; }
+      .hero-content { padding: 3rem 1rem; }
+      .hero h1 { font-size: 1.8rem; }
+      section { padding: 2rem 1rem; }
+      .servicio { padding: 1rem; }
+      .proyectos { gap: 1rem; }
+      footer { padding: 1rem; }
+    }
+
+    .no-scroll { overflow: hidden; height:100%; }
   </style>
 </head>
 
@@ -223,11 +276,14 @@ img#antes, img#despues {
       <h2 data-es="Building Industries Inc." data-en="Building Industries Inc.">Building Industries Inc.</h2>
     </div>
 
+    <!-- Botón tipo VALORES -->
+    <button class="menu-toggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
+
     <nav>
-      <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="Home.html" data-es="Inicio" data-en="Home">Inicio</a>
       <a href="Nosotros.html" data-es="Nosotros" data-en="About Us">Nosotros</a>
-      <a href="Servicios3.html" data-es="Servicios" data-en="Services">Servicios</a>
-      <a href="Proyectos9.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
+      <a href="Servicios.html" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="Proyecto.html" data-es="Proyectos" data-en="Projects">Proyectos</a>
       <a href="contactos.html" data-es="Contacto" data-en="Contact">Contacto</a>
       <button class="idioma-btn" id="btn-es">
         <img src="https://flagcdn.com/w20/mx.png" alt="Español" style="width:24px; height:auto;">
@@ -244,12 +300,12 @@ img#antes, img#despues {
     <div class="hero-content">
       <h1 data-es="Building Industries Inc." data-en="Building Industries Inc.">Building Industries Inc.</h1>
       <div>
-        <button class="btn" 
-    onclick="window.location.href='contactos.html#abrir-cotizacion';"
-    data-es="Solicita una cotización" 
-    data-en="Request a Quote">
-    Solicita una cotización
-</button>
+        <button class="btn"
+          onclick="window.location.href='contactos.html#abrir-cotizacion';"
+          data-es="Solicita una cotización"
+          data-en="Request a Quote">
+          Solicita una cotización
+        </button>
 
         <button class="btn" onclick="window.location.href='valores7.html';"
           data-es="Conoce nuestros valores" data-en="Know our values">Conoce nuestros valores</button>
@@ -325,7 +381,7 @@ img#antes, img#despues {
   </section>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Lightbox de imágenes">
     <span class="close" aria-label="Cerrar">&times;</span>
     <img src="" alt="Vista ampliada">
     <span class="prev" aria-label="Anterior">&#10094;</span>
@@ -358,34 +414,41 @@ img#antes, img#despues {
   <!-- Scripts -->
   <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Cambio de idioma
+
     const btnEs = document.getElementById("btn-es");
     const btnEn = document.getElementById("btn-en");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("header nav");
+    const body = document.body;
 
+    /* =========================
+       Traducción
+       ========================= */
     function cambiarIdioma(idioma) {
       document.querySelectorAll("[data-es]").forEach(el => {
-        el.textContent = idioma === "es" ? el.getAttribute("data-es") : el.getAttribute("data-en");
+        if (el.tagName.toLowerCase() === "img" && el.closest('header')) return;
+        const texto = idioma === "es" ? el.getAttribute("data-es") : el.getAttribute("data-en");
+        if (texto !== null) el.textContent = texto;
       });
 
-      // APLICAR clase active para que el botón brille en verde
       if (btnEs && btnEn) {
         btnEs.classList.toggle("active", idioma === "es");
         btnEn.classList.toggle("active", idioma === "en");
       }
 
-      // Guardar preferencia y actualizar atributo lang en <html>
-      try { localStorage.setItem("idioma", idioma); } catch(e) {}
+      try { localStorage.setItem("idioma", idioma); } catch(e){}
       document.documentElement.setAttribute("lang", idioma);
     }
 
-    btnEs.addEventListener("click", () => cambiarIdioma("es"));
-    btnEn.addEventListener("click", () => cambiarIdioma("en"));
+    if (btnEs) btnEs.addEventListener("click", () => cambiarIdioma("es"));
+    if (btnEn) btnEn.addEventListener("click", () => cambiarIdioma("en"));
 
-    // Aplicar idioma guardado al cargar (si existe)
     const idiomaGuardado = localStorage.getItem("idioma") || "es";
     cambiarIdioma(idiomaGuardado);
 
-    // Fade-in de secciones
+    /* =========================
+       Animacioness croll
+       ========================= */
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -397,7 +460,6 @@ img#antes, img#despues {
     }, { threshold: 0.2, rootMargin:"0px 0px -50px 0px" });
     faders.forEach(fader => appearOnScroll.observe(fader));
 
-    // Fade-in servicios escalera
     const servicios = document.querySelectorAll('.servicios .servicio');
     const servicioObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry, i) => {
@@ -410,19 +472,25 @@ img#antes, img#despues {
     }, { threshold: 0.2 });
     servicios.forEach(s => servicioObserver.observe(s));
 
-    // Scroll suave en anclas internas
     document.querySelectorAll('header nav a').forEach(link => {
       link.addEventListener('click', e => {
-        const targetId = link.getAttribute('href');
-        if (targetId && targetId.startsWith("#")) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith("#")) {
           e.preventDefault();
-          const target = document.querySelector(targetId);
+          const target = document.querySelector(href);
           if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }
+        // en móviles, cerrar el menú después de hacer clic en cualquier enlace
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          body.classList.remove('no-scroll');
         }
       });
     });
 
-    // Lightbox
+    /* =========================
+       (galería)
+       ========================= */
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = lightbox.querySelector("img");
     const closeBtn = lightbox.querySelector(".close");
@@ -430,35 +498,77 @@ img#antes, img#despues {
     const nextBtn = lightbox.querySelector(".next");
     const proyectos = document.querySelectorAll(".proyecto");
     let currentIndex = 0;
-    const images = Array.from(proyectos).map(p => p.querySelector(".after").src);
+    const images = Array.from(proyectos).map(p => {
+      const after = p.querySelector(".after");
+      return after ? after.src : (p.querySelector("img") ? p.querySelector("img").src : "");
+    }).filter(Boolean);
 
-    proyectos.forEach((proyecto,index)=>{
-      proyecto.addEventListener("click",()=> {
-        currentIndex=index;
-        lightboxImg.src=images[currentIndex];
+    proyectos.forEach((proyecto,index) => {
+      proyecto.addEventListener("click", () => {
+        currentIndex = index;
+        lightboxImg.src = images[currentIndex];
         lightbox.classList.add("active");
+        lightbox.setAttribute('aria-hidden', 'false');
       });
     });
 
-    nextBtn.addEventListener("click",()=> {
-      currentIndex=(currentIndex+1)%images.length;
-      lightboxImg.src=images[currentIndex];
+    nextBtn.addEventListener("click", ()=> {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+    });
+    prevBtn.addEventListener("click", ()=> {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+    });
+    closeBtn.addEventListener("click", ()=> {
+      lightbox.classList.remove("active");
+      lightbox.setAttribute('aria-hidden', 'true');
+    });
+    lightbox.addEventListener("click", e => { if (e.target === lightbox) { lightbox.classList.remove("active"); lightbox.setAttribute('aria-hidden', 'true'); } });
+
+    document.addEventListener("keydown", e => {
+      if (!lightbox.classList.contains("active")) return;
+      if (e.key === "ArrowRight") { currentIndex = (currentIndex + 1) % images.length; lightboxImg.src = images[currentIndex]; }
+      if (e.key === "ArrowLeft") { currentIndex = (currentIndex - 1 + images.length) % images.length; lightboxImg.src = images[currentIndex]; }
+      if (e.key === "Escape") { lightbox.classList.remove("active"); lightbox.setAttribute('aria-hidden', 'true'); }
     });
 
-    prevBtn.addEventListener("click",()=> {
-      currentIndex=(currentIndex-1+images.length)%images.length;
-      lightboxImg.src=images[currentIndex];
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+        // bloquear scroll cuando el nav está abierto
+        if (nav.classList.contains("active")) {
+          body.classList.add("no-scroll");
+        } else {
+          body.classList.remove("no-scroll");
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        const isClickInsideNav = nav.contains(e.target) || menuToggle.contains(e.target);
+        if (!isClickInsideNav && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          body.classList.remove('no-scroll');
+        }
+      });
+
+      nav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            body.classList.remove('no-scroll');
+          }
+        });
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        body.classList.remove('no-scroll');
+      }
     });
 
-    closeBtn.addEventListener("click",()=> lightbox.classList.remove("active"));
-    lightbox.addEventListener("click",e=> { if(e.target===lightbox) lightbox.classList.remove("active"); });
-
-    document.addEventListener("keydown", e=>{
-      if(!lightbox.classList.contains("active")) return;
-      if(e.key==="ArrowRight"){ currentIndex=(currentIndex+1)%images.length; lightboxImg.src=images[currentIndex]; }
-      if(e.key==="ArrowLeft"){ currentIndex=(currentIndex-1+images.length)%images.length; lightboxImg.src=images[currentIndex]; }
-      if(e.key==="Escape"){ lightbox.classList.remove("active"); }
-    });
   });
   </script>
 </body>
